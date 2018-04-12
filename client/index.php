@@ -39,9 +39,9 @@
 
         <div class="col-sm-3">
           <select class="form-control" id="ftype">
-            <option>One way</option>
-            <option>Round trip</option>
-            <option>Multi city</option>
+            <option>One-way</option>
+            <option>Round-trip</option>
+            <option>Multi-city</option>
           </select>
         </div>
       </div>
