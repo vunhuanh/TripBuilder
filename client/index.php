@@ -15,60 +15,65 @@
 
       <!-- USER -->
       <div class="row">
-        <div class="col-sm-3">User:</div>
-        <div class="col-sm-9">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">None
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a href="#">admin</a></li>
-              <li><a href="#">test1</a></li>
-              <li><a href="#">test2</a></li>
-            </ul>
+        <div class="form-group">
+          <div class="col-sm-3">
+            <label>User</label>
+          </div>
+
+          <div class="col-sm-3">
+            <select class="form-control" id="user">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
           </div>
         </div>
       </div>
 
       <!-- FLIGHT TYPE -->
       <div class="row">
-        <div class="col-sm-3">Type of flight:</div>
         <div class="col-sm-3">
-          <input type="radio" value="one">One-way
+          <label>Type of flight</label>
         </div>
+
         <div class="col-sm-3">
-          <input type="radio" value="round">Roundtrip
-        </div>
-        <div class="col-sm-3">
-          <input type="radio" value="multi">Multi-city
+          <select class="form-control" id="ftype">
+            <option>One way</option>
+            <option>Round trip</option>
+            <option>Multi city</option>
+          </select>
         </div>
       </div>
 
       <!-- FLIGHT SELECTION -->
       <div class="row">
-        <div class="col-sm-3">Origin:</div>
-        <div class="col-sm-3 dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Airport
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">admin</a></li>
-            <li><a href="#">test1</a></li>
-            <li><a href="#">test2</a></li>
-          </ul>
+        <div class="col-sm-3">
+          <label>Origin</label>
         </div>
 
-        <div class="col-sm-3">Destination:</div>
-        <div class="col-sm-3 dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Airport
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">admin</a></li>
-            <li><a href="#">test1</a></li>
-            <li><a href="#">test2</a></li>
-          </ul>
+        <div class="col-sm-3">
+          <select class="form-control" id="src">
+            <option>a1</option>
+            <option>a2</option>
+            <option>a3</option>
+          </select>
+        </div>
+
+        <div class="col-sm-3">
+          <label>Destination</label>
+        </div>
+
+        <div class="col-sm-3">
+          <select class="form-control" id="dst">
+            <option>a1</option>
+            <option>a2</option>
+            <option>a3</option>
+          </select>
         </div>
       </div>
       
-      <div class="row"><button>Add flight to trip</button></div>
+      <div class="row"><input type="submit" id="submit" value="Add flight to trip"></div>
 
 
     </div> <!--END CONTAINER-->
@@ -76,3 +81,30 @@
 
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  //Redirect to API
+  var base_url="http://localhost/tripbuilder/api/";
+
+  $("#submit").click(function(){
+    //Get flight info
+    var user = $("#user option:selected").text();
+    var ftype = $("#ftype option:selected").text();
+    var src = $("#src option:selected").text();
+    var dst = $("#dst option:selected").text();
+    var postdata = "user="+user + "&ftype="+ftype + "&src="+src + "&dst="+dst;
+
+    $.ajax({
+      type: "POST",
+      url: base_url + "addflight",
+      data: postdata,
+      success: function(data){
+        console.log(data);
+      }
+    }); 
+  });
+  
+
+});
+</script>

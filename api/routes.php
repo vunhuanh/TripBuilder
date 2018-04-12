@@ -9,8 +9,8 @@ $app->get('/index', function ($request, $response) {
   require 'index.php';
 });
 
-$app->post('/checkusername', function ($request, $response) {
-  require 'checkusername.php';
+$app->post('/addflight', function ($request, $response) {
+  require 'addflight.php';
 });
 
 $app->run();
