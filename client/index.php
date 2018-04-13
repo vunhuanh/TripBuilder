@@ -22,7 +22,7 @@
 
           <div class="col-sm-3">
             <select class="form-control" id="user">
-              <option>1</option>
+              <option>admin</option>
               <option>2</option>
               <option>3</option>
               <option>4</option>
@@ -54,9 +54,6 @@
 
         <div class="col-sm-3">
           <select class="form-control" id="src">
-            <option>a1</option>
-            <option>a2</option>
-            <option>a3</option>
           </select>
         </div>
 
@@ -66,9 +63,6 @@
 
         <div class="col-sm-3">
           <select class="form-control" id="dst">
-            <option>a1</option>
-            <option>a2</option>
-            <option>a3</option>
           </select>
         </div>
       </div>
@@ -86,6 +80,22 @@
 $(document).ready(function(){
   //Redirect to API
   var base_url="http://localhost/tripbuilder/api/";
+
+  //Get airport info
+  $.ajax({
+    type: "GET",
+    url: base_url + "getairports",
+    dataType: 'json',
+    success: function(data){
+      for(var i=0; i<data.length; i++){
+        console.log(data[i][0]);
+        var option = "<option>"+data[i][0]+"</option>";
+        $('#src').append(option);
+        $('#dst').append(option);
+      }
+    }
+  });
+
 
   $("#submit").click(function(){
     //Get flight info
