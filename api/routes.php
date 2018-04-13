@@ -20,6 +20,10 @@ $app->get('/usertrips', function ($request, $response) {
   require 'usertrips.php';
 });
 
+$app->post('/newtrip', function ($request, $response) {
+  require 'newtrip.php';
+});
+
 $app->post('/addflight', function ($request, $response) {
   require 'addflight.php';
 });

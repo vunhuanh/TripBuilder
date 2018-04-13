@@ -4,6 +4,6 @@
     session_destroy();
   }
   catch(Exception $e){
-    echo "Error resetting session";
+    echo json_encode($e);
   }
 ?>

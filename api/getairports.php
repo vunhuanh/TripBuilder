@@ -9,7 +9,7 @@
     echo json_encode($airportnames, JSON_UNESCAPED_UNICODE);
   }
   catch(Exception $e){
-    echo "Error getting airports";
+    echo json_encode($e);
   }
 
 ?>

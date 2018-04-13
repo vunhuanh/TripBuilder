@@ -49,51 +49,39 @@ $(document).ready(function(){
     var ftype = $("#ftype option:selected").text();
     var src = $("#src option:selected").text();
     var dst = $("#dst option:selected").text();
-    var postdata = "user="+user + "&ftype="+ftype + "&src="+src + "&dst="+dst + "&addnew=0";
+    var order = $("#order").children().length;
+    var postdata = "user="+user + "&ftype="+ftype + "&src="+src + "&dst="+dst;
 
     $.ajax({
       type: "POST",
-      url: base_url + "addflight",
+      url: base_url + "newtrip",
       data: postdata,
       dataType: 'json',
       success: function(data){
-        console.log(data);
-        $('#itinerary').empty();
         alert("Created new " + ftype + " trip for " + user);
-        for(var i=0; i<data.length; i++){
+        $('#order').append("<div class=\"row\" id=\"o1\">"+data[0]+"</div>");
+        for(var i=1; i<data.length; i++){
           $('#details').append("<div class=\"row\">"+data[i]+"</div>");
         }
         if(ftype == "Multi-city"){
           $('#addnew').css('display','block');
         }
-      }
+        else{
+          $('#make').hide();
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        console.log("Status: " + textStatus); 
+        console.log("Error: " + errorThrown); 
+      } 
     }); 
   });
 
   //Add new trip to multi-city
   $("#addnew").click(function(){
-    //Add new flight selection fields
-    $('#field').clone().appendTo('#fselect');
-
-    //Get flight info
-    var user = $("#user").text();
-    var ftype = $("#ftype option:selected").text();
-    var src = $("#src option:selected").text();
-    var dst = $("#dst option:selected").text();
-    var postdata = "user="+user + "&ftype="+ftype + "&src="+src + "&dst="+dst + "&addnew=1";
-
-    $.ajax({
-      type: "POST",
-      url: base_url + "addflight",
-      data: postdata,
-      dataType: 'json',
-      success: function(data){
-        alert("Added new flight to " + ftype + " trip for " + user);
-        for(var i=0; i<data.length; i++){
-          $('#details').append("<div class=\"row\">"+data[i]+"</div>");
-        }
-      }
-    }); 
+    var tripID = $("#o1").html();
+    var url = "/tripbuilder/client/addtrip.php?"+tripID;
+    window.location.href = url;
   });
 
 });
