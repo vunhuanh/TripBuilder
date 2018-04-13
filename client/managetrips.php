@@ -18,6 +18,8 @@
         </div>
       </div>
 
+      <input type="text" class="form-control" id="order1">
+
     </div> <!--END CONTAINER-->
   </body>
 </html>

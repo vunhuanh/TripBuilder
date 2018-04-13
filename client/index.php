@@ -35,23 +35,4 @@
   </body>
 </html>
 
-<script>
-$(document).ready(function(){
-  //Redirect to API
-  var base_url="http://localhost/tripbuilder/api/";
 
-  $("#new").click(function(){
-    var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/newtrip.php?"+user;
-    window.location.href = url;
-  });
-
-  $("#manage").click(function(){
-    var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/managetrips.php?"+user;
-    window.location.href = url;
-  });
-  
-
-});
-</script>

@@ -8,8 +8,16 @@ require 'classes/trip.php';
 
 $app = new \Slim\App;
 
+$app->post('/newsession', function ($request, $response) {
+  require 'newsession.php';
+});
+
 $app->get('/getairports', function ($request, $response) {
   require 'getairports.php';
+});
+
+$app->get('/usertrips', function ($request, $response) {
+  require 'usertrips.php';
 });
 
 $app->post('/addflight', function ($request, $response) {
