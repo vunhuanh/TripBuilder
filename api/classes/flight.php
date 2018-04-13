@@ -4,7 +4,12 @@ class Flight{
   private $flightID;
   private $origin;
   private $destination;
-  private $next;
+
+  public function __construct($flightID, $origin, $destination){
+    $this->flightID = $flightID;
+    $this->origin = $origin;
+    $this->destination = $destination;
+  }
 
   public function get_flightID(){
       return $this->flightID;
@@ -16,12 +21,7 @@ class Flight{
       return $this->destination;
   }
   
-  function __construct($flightID, $origin, $destination){
-    $this->flightID = $flightID;
-    $this->origin = $origin;
-    $this->destination = $destination;
-    $this->next = NULL;
-  }
+
 }
 
 

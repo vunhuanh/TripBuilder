@@ -1,55 +1,45 @@
 <?php
 
-class TripNode{
-  private $flight;
-  private $next;
-  function __construct($flight){
-    $this->flight = $flight;
-    $this->next = NULL;
-  }
-}
-
 class Trip{
   private $tripID;
   private $type;
-  private $head;
+  protected $flights = array();
 
-  function __construct($flight){
+  public function __construct($going_flight){
     $this->tripID = rand();
-    $this->type = 'One-way';
-    $head = $flight;
+    $this->type = "One-way";
+    array_push($this->flights, $going_flight);
   }     
 
-  public function remove($flight){
-    $this->head = NULL;
+  public function get_tripID(){
+      return $this->tripID;
+  }
+  public function get_type(){
+      return $this->type;
+  }
+  public function printItinerary(){
+    $toprint = "";
+    foreach ($this->flights as $flight) {
+      $toprint .= $flight->get_flightID() . "->";
+    }
+    return $toprint;
   }
 
-  public function printItinerary(){
-    $trip = array();
-    $current = $this->head;
-    while($current != NULL){
-      array_push($trip, $current->get_flightID());
-      $current = $current->next;
-    }
-    foreach($trip as $flight){
-        echo $flight."->";
-    }
+  public function add($new_flight){
+    return "Cannot add more flights to a one-way trip.\n";
   }
 
 }
 
 class RoundTrip extends Trip{
-  function __construct($going_flight){
-    $this->tripID = rand();
-    $this->type = 'Round-trip';
-    $head = $going_flight;
+  public function __construct($going_flight){
+    parent::__construct($going_flight);
+    $this->type = "Round-trip";
   } 
 
   public function add($return_flight){
-    $this->head->next = $return_flight;
+    array_push($this->flights, $return_flight);
   }
     
-
-
 }
 ?>
