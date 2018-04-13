@@ -42,4 +42,16 @@ class RoundTrip extends Trip{
   }
     
 }
+
+class MultiCity extends Trip{
+  public function __construct($going_flight){
+    parent::__construct($going_flight);
+    $this->type = "Multi-city";
+  } 
+
+  public function add($new_flight){
+    array_push($this->flights, $new_flight);
+  }
+    
+}
 ?>

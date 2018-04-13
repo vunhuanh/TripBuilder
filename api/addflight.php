@@ -33,9 +33,9 @@
 
       echo "Added round-trip: ".$trip->printItinerary()."\n";
     }
-    // // else if($ftype == 'Multi-city'){
-
-    // // }
+    else if($ftype == 'Multi-city'){
+      
+    }
 
 
   } 
