@@ -9,7 +9,7 @@ TripBuilder is a web service (API) that serves as the engine for front-end websi
 * Front-end client (written in HTML, JavaScript) to interact with the API
 
 ## Installation
-* Clone repository into your server's public folder (ex: XAMPP stack)
+* Clone repository into your server's public folder (ex: XAMPP's htdocs folder)
 * Import the `TripBuilder.sql` database into your RDBMS
 * Edit the connection parameters in `api/DB_connection.php` if necessary
 * Launch via `client/index.php`
