@@ -2,6 +2,8 @@
 <html>
   <?php 
     require 'head.html';
+    session_start();
+    $_SESSION['user'] = $_SERVER['QUERY_STRING'];
   ?>
   <body>
     <div class="container-fluid" style="margin:2rem">
@@ -11,15 +13,25 @@
           <input class="btn-default" type="submit" id="home" value="Home">
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-sm-1">User:</div>
+        <div class="col-sm-1" id="user"><?php echo $_SESSION['user'];?></div>
+      </div>
       
       <div class="row">
-        <div class="col-sm-10">
-          <input class="btn-default" type="submit" id="submit" value="Add flight to trip">
+        <div class="col-sm-1">
+          <label>TripID</label>
+        </div>
+        <div class="col-sm-2">
+          <label>Type</label>
+        </div>
+        <div class="col-sm-9">
+          <label>Action</label>
         </div>
       </div>
 
-      <input type="text" class="form-control" id="order1">
-
+      
     </div> <!--END CONTAINER-->
   </body>
 </html>

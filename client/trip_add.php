@@ -3,6 +3,7 @@
   <?php 
     require 'head.html';
     session_start();
+    $_SESSION['tripID'] = $_SERVER['QUERY_STRING'];
   ?>
   <body>
     <div class="container-fluid" style="margin:2rem">
@@ -15,7 +16,7 @@
 
       <div class="row">
         <div class="col-sm-1">Trip:</div>
-        <div class="col-sm-1" id="trip"><?php echo $_SERVER['QUERY_STRING'];?></div>
+        <div class="col-sm-1" id="trip"><?php echo $_SESSION['tripID'];?></div>
       </div>
       
       <div class="row">
@@ -53,15 +54,15 @@
             <div class="col-sm-3">Current itinerary</div>
           </div>
           <div class="row">
-            <div class="col-sm-2"><label>Order</label></div>
-            <div class="col-sm-10"><label>Details</label></div>
+            <div class="col-sm-1"><label>Order</label></div>
+            <div class="col-sm-11"><label>Details</label></div>
           </div>
 
           <div class="row" id="itinerary">
-            <div class="col-sm-2" id="triporder">
+            <div class="col-sm-1" id="triporder">
             </div>
 
-            <div class="col-sm-10" id="tripdetails">
+            <div class="col-sm-11" id="tripdetails">
               <div></div>
             </div>
           </div>

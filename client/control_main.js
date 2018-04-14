@@ -2,6 +2,19 @@ $(document).ready(function(){
   //Redirect to API
   var base_url="http://localhost/tripbuilder/api/";
 
+  //Get user info
+  $.ajax({
+    type: "GET",
+    url: base_url + "getusers",
+    dataType: 'json',
+    success: function(data){
+      for(var i=0; i<data.length; i++){
+        var option = "<option>"+data[i][0]+"</option>";
+        $('#users').append(option);
+      }
+    }
+  });
+
   //Go back to home page
   $("#home").click(function(){
     $.ajax({
@@ -57,16 +70,24 @@ $(document).ready(function(){
       data: postdata,
       dataType: 'json',
       success: function(data){
-        console.log(data);
-        alert("Created new " + ftype + " trip for " + user);
-        $('#order').append("<div class=\"row\" id=\"o1\">"+data[0]+"</div>");
-        for(var i=1; i<data.length; i++){
-          $('#details').append("<div class=\"row\">"+data[i]+"</div>");
+        if(data == "same"){
+          alert("Origin and destination airports are the same");
         }
-        if(ftype == "Multi-city"){
-          $('#addnew').css('display','block');
+        else if(data == "noflight"){
+          alert("There are no flights that match this query");
         }
-        $('#make').hide();
+        else{
+          alert("Created new " + ftype + " trip for " + user);
+          $('#order').append("<div class=\"row\" id=\"o1\">"+data[0]+"</div>");
+          for(var i=1; i<data.length; i++){
+            $('#details').append("<div class=\"row\">"+data[i]+"</div>");
+          }
+          if(ftype == "Multi-city"){
+            $('#addnew').css('display','block');
+          }
+          $('#make').hide();
+        }
+        
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 
         console.log("Status: " + textStatus); 

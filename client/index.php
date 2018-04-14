@@ -18,8 +18,8 @@
           </div>
 
           <div class="col-sm-3">
-            <select class="form-control" id="user">
-              <option>admin</option>
+            <select class="form-control" id="users">
+              <option></option>
             </select>
           </div>
         </div>

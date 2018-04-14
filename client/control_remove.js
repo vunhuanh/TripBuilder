@@ -5,12 +5,14 @@ $(document).ready(function(){
   //Get current itinerary
   $.ajax({
     type: "GET",
-    url: base_url + "displaytrip",
+    url: base_url + "flight_display",
     dataType: 'json',
     success: function(data){
       for(var i=1; i<data.length; i++){
-        $('#triporder').append("<div class=\"row\">"+i+"</div>");
-        $('#tripdetails').append("<div class=\"row\">"+data[i]+"</div>");
+        $('#flightorder').append("<div class=\"row\">"+i+"</div>");
+        $('#flightdetails').append("<div class=\"row\">"+data[i]+"</div>");
+        var flightID = data[i].substr(0, data[i].indexOf(':'));
+        $('#flightremove').append("<input type=\"submit\" id=\"removeflight\" class=\""+flightID+"\"value=\"Remove flight\">");
       }
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -19,31 +21,21 @@ $(document).ready(function(){
     } 
   });
 
-  $("#addanother").click(function(){
-    //Get flight info
-    var src = $("#src option:selected").text();
-    var dst = $("#dst option:selected").text();
-    var postdata = "src="+src + "&dst="+dst;
-
+  $(".container-fluid").on("click", "#removeflight", function(){
+    var tripID = $("#trip").text();
+    var flightID = $(this).attr('class');
+    var postdata = "tripID="+tripID + "&flightID="+flightID;
     $.ajax({
       type: "POST",
-      url: base_url + "addflight",
+      url: base_url + "trip_remove",
       data: postdata,
-      dataType: 'json',
       success: function(data){
-        $('#triporder').empty();
-        $('#tripdetails').empty();
-        alert("Added new flight to trip");
-        console.log(data);
-        for(var i=1; i<data.length; i++){
-          $('#triporder').append("<div class=\"row\">"+i+"</div>");
-          $('#tripdetails').append("<div class=\"row\">"+data[i]+"</div>");
-        }
+        location.reload();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 
         console.log("Status: " + textStatus); 
         console.log("Error: " + errorThrown); 
       } 
-    }); 
+    });
   });
 });

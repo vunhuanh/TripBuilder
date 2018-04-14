@@ -31,13 +31,21 @@ $(document).ready(function(){
       data: postdata,
       dataType: 'json',
       success: function(data){
-        $('#triporder').empty();
-        $('#tripdetails').empty();
-        alert("Added new flight to trip");
-        console.log(data);
-        for(var i=1; i<data.length; i++){
-          $('#triporder').append("<div class=\"row\">"+i+"</div>");
-          $('#tripdetails').append("<div class=\"row\">"+data[i]+"</div>");
+        if(data == "same"){
+          alert("Origin and destination airports are the same");
+        }
+        else if(data == "noflight"){
+          alert("There are no flights that match this query");
+        }
+        else{
+          $('#triporder').empty();
+          $('#tripdetails').empty();
+          alert("Added new flight to trip");
+          console.log(data);
+          for(var i=1; i<data.length; i++){
+            $('#triporder').append("<div class=\"row\">"+i+"</div>");
+            $('#tripdetails').append("<div class=\"row\">"+data[i]+"</div>");
+          }
         }
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 

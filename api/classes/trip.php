@@ -6,10 +6,10 @@ class Trip{
   protected $flights = array();
 
   //Constructor, get and set functions
-  public function __construct($going_flight){
-    $this->tripID = rand(1, 100000000);
+  public function __construct($id, $going_flight){
+    $this->tripID = $id;
     $this->type = "One-way";
-    $this->flights["1"] = $going_flight;
+    $this->flights[1] = $going_flight;
   }     
   public function get_tripID(){
       return $this->tripID;
@@ -36,25 +36,41 @@ class Trip{
 }
 
 class RoundTrip extends Trip{
-  public function __construct($going_flight){
-    parent::__construct($going_flight);
+  public function __construct($id, $going_flight){
+    parent::__construct($id, $going_flight);
     $this->type = "Round-trip";
   } 
 
   public function addReturn($return_flight){
-    $this->flights["2"] = $return_flight;
+    $this->flights[2] = $return_flight;
   }
     
 }
 
 class MultiCity extends Trip{
-  public function __construct($going_flight){
-    parent::__construct($going_flight);
+  public function __construct($id, $going_flight){
+    parent::__construct($id, $going_flight);
     $this->type = "Multi-city";
   } 
 
   public function addFlight($new_flight, $order){
     $this->flights[$order] = $new_flight;
+  }
+
+  public function removeFlight($to_remove){
+    foreach($this->flights as $order=>$flight){
+      if($flight->get_flightID() == $to_remove){
+        unset($this->flights[$order]);
+      }
+    }
+  }
+
+  public function updateTripDB($db, $tripID){
+    $order = 1;
+    foreach($this->flights as $flight){
+      tripUpdate($db, $tripID, $flight->get_flightID(), $order);
+      $order++;
+    }
   }
     
 }

@@ -4,22 +4,35 @@
   $src = $request->getParam('src');
   $dst = $request->getParam('dst');
   session_start();
-  $user = $_SESSION['user'];
   $tripID = $_SESSION['tripID'];
 
   try{ 
-    $trip = build($tripID, $db);
+    //Check that origin and destination are different airports
+    if($src == $dst){
+      $result = "same";
+      echo json_encode($result);
+    }
+    else{
+      //Find flight with corresponding origin and destination airports
+      $flightID = searchFlight($db, $src, $dst);
 
-    //Add new flight to trip
-    $flightID = searchFlight($db, $src, $dst);
-    $next_flight = new Flight($flightID, $src, $dst);
-    $trip->addFlight($next_flight, $trip->length()+1);
+      //If there are no flights, return
+      if($flightID == NULL){
+        $result = "noflight";
+        echo json_encode($result);
+      }
+      else{
+        //Add new flight to trip
+        $next_flight = new Flight($flightID, $src, $dst);
+        $trip = build($db, $tripID);
+        $trip->addFlight($next_flight, $trip->length()+1);
 
-    //Add to DB
-    tripFlightDB($db, $_SESSION['tripID'], $next_flight->get_flightID(), $trip->length()+1);
+        //Add to DB
+        tripFlightDB($db, $_SESSION['tripID'], $next_flight->get_flightID(), $trip->length());
 
-    echo json_encode($trip->printItinerary(), JSON_UNESCAPED_UNICODE);
-
+        echo json_encode($trip->printItinerary(), JSON_UNESCAPED_UNICODE);
+      }
+    }
   }
 
   catch(Exception $e){
