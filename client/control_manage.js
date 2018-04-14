@@ -27,13 +27,13 @@ $(document).ready(function(){
 
   $(".container-fluid").on("click", "#addflight", function(){
     var tripID = $(this).attr('class');
-    var redirect = "/tripbuilder/client/trip_add.php?"+tripID;
+    var redirect = "/tripbuilder/client/display_add.php?"+tripID;
     window.location.href = redirect;
   });
 
   $(".container-fluid").on("click", "#removeflight", function(){
     var tripID = $(this).attr('class');
-    var redirect = "/tripbuilder/client/trip_remove.php?"+tripID;
+    var redirect = "/tripbuilder/client/display_remove.php?"+tripID;
     window.location.href = redirect;
   });
 

@@ -1,6 +1,5 @@
 <?php
   $db = getDB();
-  //Get post parameters
   $src = $request->getParam('src');
   $dst = $request->getParam('dst');
   session_start();
@@ -28,14 +27,15 @@
         $trip->addFlight($next_flight, $trip->length()+1);
 
         //Add to DB
-        tripFlightDB($db, $_SESSION['tripID'], $next_flight->get_flightID(), $trip->length());
+        tripFlightDB($db, $tripID, $next_flight->get_flightID(), $trip->length());
 
         echo json_encode($trip->printItinerary(), JSON_UNESCAPED_UNICODE);
       }
     }
   }
 
-  catch(Exception $e){
-    echo json_encode($e);
+  catch(PDOException $e){
+    $result = "sqlerror";
+    echo json_encode($result);
   }
 ?>
