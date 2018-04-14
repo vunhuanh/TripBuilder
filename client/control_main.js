@@ -17,14 +17,14 @@ $(document).ready(function(){
   //Make new trip for user
   $("#new").click(function(){
     var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/newtrip.php?"+user;
+    var url = "/tripbuilder/client/trip_new.php?"+user;
     window.location.href = url;
   });
 
   //Manage user's upcoming trips
   $("#manage").click(function(){
     var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/managetrips.php?"+user;
+    var url = "/tripbuilder/client/trip_manage.php?"+user;
     window.location.href = url;
   });
 
@@ -49,15 +49,15 @@ $(document).ready(function(){
     var ftype = $("#ftype option:selected").text();
     var src = $("#src option:selected").text();
     var dst = $("#dst option:selected").text();
-    var order = $("#order").children().length;
     var postdata = "user="+user + "&ftype="+ftype + "&src="+src + "&dst="+dst;
 
     $.ajax({
       type: "POST",
-      url: base_url + "newtrip",
+      url: base_url + "trip_new",
       data: postdata,
       dataType: 'json',
       success: function(data){
+        console.log(data);
         alert("Created new " + ftype + " trip for " + user);
         $('#order').append("<div class=\"row\" id=\"o1\">"+data[0]+"</div>");
         for(var i=1; i<data.length; i++){
@@ -66,9 +66,7 @@ $(document).ready(function(){
         if(ftype == "Multi-city"){
           $('#addnew').css('display','block');
         }
-        else{
-          $('#make').hide();
-        }
+        $('#make').hide();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 
         console.log("Status: " + textStatus); 
@@ -80,8 +78,8 @@ $(document).ready(function(){
   //Add new trip to multi-city
   $("#addnew").click(function(){
     var tripID = $("#o1").html();
-    var url = "/tripbuilder/client/addtrip.php?"+tripID;
-    window.location.href = url;
+    var redirect = "/tripbuilder/client/trip_add.php?"+tripID;
+    window.location.href = redirect;
   });
 
 });

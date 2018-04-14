@@ -28,6 +28,11 @@ class Trip{
     return $toprint;
   }
 
+  //Get number of flights in trip
+  public function length(){
+    return sizeof($this->flights);
+  }
+
 }
 
 class RoundTrip extends Trip{
