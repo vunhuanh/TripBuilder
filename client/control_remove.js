@@ -5,14 +5,14 @@ $(document).ready(function(){
   //Get current itinerary
   $.ajax({
     type: "GET",
-    url: base_url + "flight_display",
+    url: base_url + "trip_display",
     dataType: 'json',
     success: function(data){
       for(var i=1; i<data.length; i++){
         $('#flightorder').append("<div class=\"row\">"+i+"</div>");
         $('#flightdetails').append("<div class=\"row\">"+data[i]+"</div>");
         var flightID = data[i].substr(0, data[i].indexOf(':'));
-        $('#flightremove').append("<input type=\"submit\" id=\"removeflight\" class=\""+flightID+"\"value=\"Remove flight\">");
+        $('#flightremove').append("<input type=\"submit\" class=\"btn-default removeflight\" id=\""+flightID+"\"value=\"Remove flight\">");
       }
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -22,9 +22,9 @@ $(document).ready(function(){
   });
 
   //Remove flight from trip
-  $(".container-fluid").on("click", "#removeflight", function(){
+  $(".container-fluid").on("click", ".removeflight", function(){
     var tripID = $("#trip").text();
-    var flightID = $(this).attr('class');
+    var flightID = $(this).attr('id');
     var postdata = "tripID="+tripID + "&flightID="+flightID;
     $.ajax({
       type: "POST",

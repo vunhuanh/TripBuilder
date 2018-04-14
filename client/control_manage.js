@@ -11,10 +11,10 @@ $(document).ready(function(){
       for(var i=0; i<data.length; i++){
         var toappend;
         if(data[i][1] == "Multi-city"){
-          toappend = "<div class=\"row\"><div class=\"col-sm-1\">"+data[i][0]+"</div><div class=\"col-sm-2\">"+data[i][1]+"</div><div class=\"col-sm-2\"><input type=\"submit\" id=\"addflight\" class=\""+data[i][0]+"\"value=\"Add a flight\"></div><div class=\"col-sm-2\"><input type=\"submit\" id=\"removeflight\" class=\""+data[i][0]+"\"value=\"Remove a flight\"></div><div class=\"col-sm-2\"><input type=\"submit\" id=\"deletetrip\" class=\""+data[i][0]+"\"value=\"Delete trip\"></div></div>";
+          toappend = "<div class=\"row\"><div class=\"col-sm-1\">"+data[i][0]+"</div><div class=\"col-sm-2\">"+data[i][1]+"</div><div class=\"col-sm-2\"><input type=\"submit\" class=\"btn-default addflight\" id=\""+data[i][0]+"\"value=\"Add a flight\"></div><div class=\"col-sm-2\"><input type=\"submit\" class=\"btn-default removeflight\" id=\""+data[i][0]+"\"value=\"Remove a flight\"></div><div class=\"col-sm-2\"><input type=\"submit\" class=\"btn-default deletetrip\" id=\""+data[i][0]+"\"value=\"Delete trip\"></div></div>";
         }
         else{
-          toappend = "<div class=\"row\"><div class=\"col-sm-1\">"+data[i][0]+"</div><div class=\"col-sm-2\">"+data[i][1]+"</div><div class=\"col-sm-2\"></div><div class=\"col-sm-2\"></div><div class=\"col-sm-2\"><input type=\"submit\" id=\"deletetrip\" class=\""+data[i][0]+"\"value=\"Delete trip\"></div></div>";
+          toappend = "<div class=\"row\"><div class=\"col-sm-1\">"+data[i][0]+"</div><div class=\"col-sm-2\">"+data[i][1]+"</div><div class=\"col-sm-2\"></div><div class=\"col-sm-2\"></div><div class=\"col-sm-2\"><input type=\"submit\" class=\"btn-default deletetrip\" id=\""+data[i][0]+"\"value=\"Delete trip\"></div></div>";
         }
         $(".container-fluid").append(toappend);
       }
@@ -25,20 +25,20 @@ $(document).ready(function(){
     } 
   });
 
-  $(".container-fluid").on("click", "#addflight", function(){
-    var tripID = $(this).attr('class');
+  $(".container-fluid").on("click", ".addflight", function(){
+    var tripID = $(this).attr('id');
     var redirect = "/tripbuilder/client/display_add.php?"+tripID;
     window.location.href = redirect;
   });
 
-  $(".container-fluid").on("click", "#removeflight", function(){
-    var tripID = $(this).attr('class');
+  $(".container-fluid").on("click", ".removeflight", function(){
+    var tripID = $(this).attr('id');
     var redirect = "/tripbuilder/client/display_remove.php?"+tripID;
     window.location.href = redirect;
   });
 
-  $(".container-fluid").on("click", "#deletetrip", function(){
-    var tripID = $(this).attr('class');
+  $(".container-fluid").on("click", ".deletetrip", function(){
+    var tripID = $(this).attr('id');
     var postdata = "tripID="+tripID;
     $.ajax({
       type: "POST",
