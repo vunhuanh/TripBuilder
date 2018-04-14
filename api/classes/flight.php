@@ -12,13 +12,19 @@ class Flight{
   }
 
   public function get_flightID(){
-      return $this->flightID;
+    return $this->flightID;
   }
   public function get_origin(){
-      return $this->origin;
+    return $this->origin;
   }
   public function get_destination(){
-      return $this->destination;
+    return $this->destination;
+  }
+  public function get_details(){
+    $result = $this->flightID . ": ";
+    $result .= $this->origin . "->";
+    $result .= $this->destination;
+    return $result;
   }
   
 
