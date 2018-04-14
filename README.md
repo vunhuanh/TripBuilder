@@ -12,3 +12,6 @@ TripBuilder is a web service (API) that serves as the engine for front-end websi
 * Import the TripBuilder.sql database into your RDBMS
 * Edit the connection parameters in api/DB_connection.php if necessary
 * Launch via client/index.php
+
+## Usage
+* Please see the wiki for more information
