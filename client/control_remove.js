@@ -21,6 +21,7 @@ $(document).ready(function(){
     } 
   });
 
+  //Remove flight from trip
   $(".container-fluid").on("click", "#removeflight", function(){
     var tripID = $("#trip").text();
     var flightID = $(this).attr('class');

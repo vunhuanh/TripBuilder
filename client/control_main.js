@@ -29,15 +29,15 @@ $(document).ready(function(){
 
   //Make new trip for user
   $("#new").click(function(){
-    var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/trip_new.php?"+user;
+    var user = $("#users option:selected").text();
+    var url = "/tripbuilder/client/display_new.php?"+user;
     window.location.href = url;
   });
 
   //Manage user's upcoming trips
   $("#manage").click(function(){
-    var user = $("#user option:selected").text();
-    var url = "/tripbuilder/client/trip_manage.php?"+user;
+    var user = $("#users option:selected").text();
+    var url = "/tripbuilder/client/display_manage.php?"+user;
     window.location.href = url;
   });
 
@@ -99,7 +99,7 @@ $(document).ready(function(){
   //Add new trip to multi-city
   $("#addnew").click(function(){
     var tripID = $("#o1").html();
-    var redirect = "/tripbuilder/client/trip_add.php?"+tripID;
+    var redirect = "/tripbuilder/client/display_add.php?"+tripID;
     window.location.href = redirect;
   });
 

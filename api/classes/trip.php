@@ -65,6 +65,7 @@ class MultiCity extends Trip{
     }
   }
 
+  //Reorder the itinerary in DB
   public function updateTripDB($db, $tripID){
     $order = 1;
     foreach($this->flights as $flight){

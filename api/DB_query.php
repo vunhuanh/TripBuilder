@@ -1,13 +1,14 @@
 <?php
   //Get users
   function getUsers($db){
-    $query = "SELECT username FROM user;";
+    $query = "SELECT username FROM user ORDER BY username;";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_NUM);
     return $users;
   }
 
+  //Get airport listing
   function getAirports($db){
     $query = "SELECT * FROM airport ORDER BY airport_name;";
     $stmt = $db->prepare($query);
@@ -58,7 +59,7 @@
 
   //Get trip itinerary
   function getItinerary($db, $tripID){
-    $query = "SELECT * FROM tripFlights t JOIN flight f ON t.flightID = f.flightID WHERE t.tripID = ? ORDER BY f.flightID;";
+    $query = "SELECT * FROM tripFlights t JOIN flight f ON t.flightID = f.flightID WHERE t.tripID = ? ORDER BY orderNB;";
     $stmt = $db->prepare($query);
     $stmt->execute([$tripID]);
     $flightdata = $stmt->fetchAll(PDO::FETCH_ASSOC);

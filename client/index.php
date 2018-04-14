@@ -7,7 +7,7 @@
     <div class="container-fluid" style="margin:2rem">
 
       <div class="row">
-        Trip Builder is a web service (API) that serves as the engine for front-end websites to manage trips for their customers.
+        TripBuilder is a web service (API) that serves as the engine for front-end websites to manage trips for their customers.
       </div>
 
       <!-- USER -->
@@ -19,7 +19,6 @@
 
           <div class="col-sm-3">
             <select class="form-control" id="users">
-              <option></option>
             </select>
           </div>
         </div>

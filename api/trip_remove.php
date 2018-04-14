@@ -6,9 +6,13 @@
   $tripID = $_SESSION['tripID'];
 
   try{ 
+    //Make Trip object
     $trip = build($db, $tripID);
+    //Remove Flight object from Trip
     $trip->removeFlight($flightID);
+    //Delete flight from DB
     deleteFlight($db, $tripID, $flightID);
+    //Update FB order
     $trip->updateTripDB($db, $tripID);
 
   }

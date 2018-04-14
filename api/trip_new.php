@@ -29,6 +29,7 @@
         $trip;
         $tripID = rand(1, 100000000);
 
+        //Make a different trip object depending on the type
         if($ftype == 'One-way'){
           $trip = new Trip($tripID, $going_flight);
           $_SESSION['tripID'] = $trip->get_tripID();
@@ -41,6 +42,7 @@
           $trip = new RoundTrip($tripID, $going_flight);
           $_SESSION['tripID'] = $trip->get_tripID();
 
+          //Make return flight
           $flightID = searchFlight($db, $dst, $src);
           $return_flight = new Flight($flightID, $dst, $src);
           $trip->addReturn($return_flight);
