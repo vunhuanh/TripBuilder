@@ -2,8 +2,6 @@
 <html>
   <?php 
     require 'head.html';
-    session_start();
-    $_SESSION['user'] = $_SERVER['QUERY_STRING'];
   ?>
   <body>
     <div class="container-fluid" style="margin:2rem">
@@ -16,7 +14,7 @@
 
       <div class="row" style="display:none">
         <div class="col-sm-1">User:</div>
-        <div class="col-sm-1" id="user"><?php echo $_SESSION['user'];?></div>
+        <div class="col-sm-1" id="user"><?php echo $_SERVER['QUERY_STRING'];?></div>
       </div>
 
       <!-- FLIGHT TYPE -->

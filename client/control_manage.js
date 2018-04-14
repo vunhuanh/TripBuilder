@@ -1,11 +1,12 @@
 $(document).ready(function(){
   //Redirect to API
   var base_url="http://localhost/tripbuilder/api/";
+  var user = $('#user').text();
 
   //Get current itinerary
   $.ajax({
     type: "GET",
-    url: base_url + "usertrips",
+    url: base_url + "usertrips/" + user,
     dataType: 'json',
     success: function(data){
       for(var i=0; i<data.length; i++){
@@ -39,11 +40,9 @@ $(document).ready(function(){
 
   $(".container-fluid").on("click", ".deletetrip", function(){
     var tripID = $(this).attr('id');
-    var postdata = "tripID="+tripID;
     $.ajax({
-      type: "POST",
-      url: base_url + "trip_delete",
-      data: postdata,
+      type: "DELETE",
+      url: base_url + "trip_delete/" + tripID,
       success: function(data){
         location.reload();
       }

@@ -1,11 +1,12 @@
 $(document).ready(function(){
   //Redirect to API
   var base_url="http://localhost/tripbuilder/api/";
+  var tripID = $("#trip").text();
 
   //Get current itinerary
   $.ajax({
     type: "GET",
-    url: base_url + "trip_display",
+    url: base_url + "trip_display/" + tripID,
     dataType: 'json',
     success: function(data){
       for(var i=1; i<data.length; i++){
@@ -25,11 +26,11 @@ $(document).ready(function(){
   $(".container-fluid").on("click", ".removeflight", function(){
     var tripID = $("#trip").text();
     var flightID = $(this).attr('id');
-    var postdata = "tripID="+tripID + "&flightID="+flightID;
+    var postdata = "/"+tripID + "/"+flightID;
     $.ajax({
-      type: "POST",
-      url: base_url + "trip_remove",
-      data: postdata,
+      type: "DELETE",
+      url: base_url + "trip_remove" + postdata,
+      //data: postdata,
       success: function(data){
         location.reload();
       },

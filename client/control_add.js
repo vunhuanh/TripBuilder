@@ -1,11 +1,12 @@
 $(document).ready(function(){
   //Redirect to API
   var base_url="http://localhost/tripbuilder/api/";
+  var tripID = $("#trip").text();
 
   //Get current itinerary
   $.ajax({
     type: "GET",
-    url: base_url + "trip_display",
+    url: base_url + "trip_display/" + tripID,
     dataType: 'json',
     success: function(data){
       for(var i=1; i<data.length; i++){
@@ -24,7 +25,8 @@ $(document).ready(function(){
     //Get flight info
     var src = $("#src option:selected").text();
     var dst = $("#dst option:selected").text();
-    var postdata = "src="+src + "&dst="+dst;
+    var tripID = $("#trip").text();
+    var postdata = "src="+src + "&dst="+dst + "&tripID="+tripID;
 
     $.ajax({
       type: "POST",

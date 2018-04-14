@@ -2,8 +2,6 @@
 <html>
   <?php 
     require 'head.html';
-    session_start();
-    $_SESSION['tripID'] = $_SERVER['QUERY_STRING'];
   ?>
   <body>
     <div class="container-fluid" style="margin:2rem">
@@ -16,7 +14,7 @@
 
       <div class="row">
         <div class="col-sm-1">Trip:</div>
-        <div class="col-sm-1" id="trip"><?php echo $_SESSION['tripID'];?></div>
+        <div class="col-sm-1" id="trip"><?php echo $_SERVER['QUERY_STRING'];?></div>
       </div>
       
       <div class="row">

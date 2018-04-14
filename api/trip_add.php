@@ -2,8 +2,7 @@
   $db = getDB();
   $src = $request->getParam('src');
   $dst = $request->getParam('dst');
-  session_start();
-  $tripID = $_SESSION['tripID'];
+  $tripID = $request->getParam('tripID');
 
   try{ 
     //Check that origin and destination are different airports

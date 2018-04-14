@@ -1,9 +1,7 @@
 <?php
   $db = getDB();
-  $tripID = $request->getParam('tripID');
-  $flightID = $request->getParam('flightID');
-  session_start();
-  $tripID = $_SESSION['tripID'];
+  $tripID = $args['tripID'];
+  $flightID = $args['flightID'];
 
   try{ 
     //Make Trip object

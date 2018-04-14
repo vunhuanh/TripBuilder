@@ -1,11 +1,9 @@
 <?php
   $db = getDB();
-  //Get post parameters
+  $user = $request->getParam('user');
   $ftype = $request->getParam('ftype');
   $src = $request->getParam('src');
   $dst = $request->getParam('dst');
-  session_start();
-  $user = $_SESSION['user'];
 
   try{ 
 
@@ -32,15 +30,15 @@
         //Make a different trip object depending on the type
         if($ftype == 'One-way'){
           $trip = new Trip($tripID, $going_flight);
-          $_SESSION['tripID'] = $trip->get_tripID();
+          $tripID = $trip->get_tripID();
 
           //Add to DB
-          tripDB($db, $_SESSION['tripID'], $user, $ftype);
-          tripFlightDB($db, $_SESSION['tripID'], $going_flight->get_flightID(), 1);
+          tripDB($db, $tripID, $user, $ftype);
+          tripFlightDB($db, $tripID, $going_flight->get_flightID(), 1);
         }
         else if($ftype == 'Round-trip'){
           $trip = new RoundTrip($tripID, $going_flight);
-          $_SESSION['tripID'] = $trip->get_tripID();
+          $tripID = $trip->get_tripID();
 
           //Make return flight
           $flightID = searchFlight($db, $dst, $src);
@@ -48,18 +46,18 @@
           $trip->addReturn($return_flight);
 
           //Add to DB
-          tripDB($db, $_SESSION['tripID'], $user, $ftype);
-          tripFlightDB($db, $_SESSION['tripID'], $going_flight->get_flightID(), 1);
-          tripFlightDB($db, $_SESSION['tripID'], $return_flight->get_flightID(), 2);
+          tripDB($db, $tripID, $user, $ftype);
+          tripFlightDB($db, $tripID, $going_flight->get_flightID(), 1);
+          tripFlightDB($db, $tripID, $return_flight->get_flightID(), 2);
         }
 
         else if($ftype == 'Multi-city'){ 
           $trip = new MultiCity($tripID, $going_flight);
-          $_SESSION['tripID'] = $trip->get_tripID();
+          $tripID = $trip->get_tripID();
 
           //Add to DB
-          tripDB($db, $_SESSION['tripID'], $user, $ftype);
-          tripFlightDB($db, $_SESSION['tripID'], $going_flight->get_flightID(), 1);
+          tripDB($db, $tripID, $user, $ftype);
+          tripFlightDB($db, $tripID, $going_flight->get_flightID(), 1);
           
         }
         //Return new trip

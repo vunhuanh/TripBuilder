@@ -2,8 +2,6 @@
 <html>
   <?php 
     require 'head.html';
-    session_start();
-    $_SESSION['tripID'] = $_SERVER['QUERY_STRING'];
   ?>
   <body>
     <div class="container-fluid" style="margin:2rem">

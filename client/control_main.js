@@ -17,14 +17,7 @@ $(document).ready(function(){
 
   //Go back to home page
   $("#home").click(function(){
-    $.ajax({
-      type: "POST",
-      url: base_url + "newsession",
-      data: {},
-      success: function(data){
-        window.location.href = "/tripbuilder/client/";
-      }
-    }); 
+    window.location.href = "/tripbuilder/client/";
   });
 
   //Make new trip for user
